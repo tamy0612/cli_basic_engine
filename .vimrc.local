@@ -1,1 +1,1 @@
-let g:template#c#project_name = 'CLI'
+let g:template#c#project_name = 'CLI_BASIC_ENGINE'
