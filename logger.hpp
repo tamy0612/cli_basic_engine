@@ -16,8 +16,8 @@ namespace cli {
   class Logger {
 
     public:
-    static const std::string DEFAULT_LOG_DIR;
     static const std::string DEFAULT_LOG_FILENAME;
+    static const std::string DEFAULT_LOG_DIR;
 
     class LogStream {
 
@@ -40,11 +40,11 @@ namespace cli {
 
     };
 
-    explicit Logger(LogLevel level = LogLevel::INFO);
+    Logger();
     ~Logger();
 
-    bool open(const std::string& log_dir = DEFAULT_LOG_DIR,
-              const std::string& filename = DEFAULT_LOG_FILENAME);
+    bool open(const std::string& filename = DEFAULT_LOG_FILENAME,
+              const std::string& log_dir = DEFAULT_LOG_DIR);
     void close();
 
     LogStream debug();
@@ -54,7 +54,6 @@ namespace cli {
     LogStream fatal();
 
     private:
-    LogLevel     _level;
     std::ostream _output_stream;
     std::filebuf _file_buffer;
 

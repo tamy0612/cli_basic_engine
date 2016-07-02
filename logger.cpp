@@ -74,8 +74,8 @@ Logger::LogStream::~LogStream()
 }
 
 
-Logger::Logger(LogLevel level)
-  : _level(level), _output_stream(nullptr)
+Logger::Logger()
+  : _output_stream(nullptr)
 {}
 
 
@@ -85,8 +85,11 @@ Logger::~Logger()
 }
 
 
-bool Logger::open(const std::string& log_dir, const std::string& filename)
+bool Logger::open(const std::string& filename, const std::string& log_dir)
 {
+  if(_file_buffer.is_open()) {
+    return true;
+  }
   auto log_file_path = boost::filesystem::path(log_dir + "/" + filename);
   try {
     auto dir = log_file_path.parent_path();

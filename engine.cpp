@@ -147,8 +147,8 @@ bool Engine::open_log()
     return true;
   }
 
-  return _logger.open(parsed_options()["log-dir"].as<std::string>(),
-                      parsed_options()["log-file"].as<std::string>());
+  return _logger.open(parsed_options()["log-file"].as<std::string>(),
+                      parsed_options()["log-dir"].as<std::string>());
 
 }
 

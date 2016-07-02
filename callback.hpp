@@ -13,7 +13,8 @@ namespace cli {
   class Command;
 
   //! Abstract callback function wrapper
-  struct CallbackFunction {
+  class CallbackFunction {
+    public:
     /*!
      * @brief  virtual dtor.
      * @note   Custom dtor. must be implemented in every derived class.
@@ -24,7 +25,7 @@ namespace cli {
      * @param[in]  command : command object
      * @note       Response of the callback function is stored in the given command object.
      */
-    virtual void operator()( Command& command ) = 0;
+    virtual void operator()(Command& command) = 0;
   };
 
 
@@ -72,13 +73,15 @@ namespace cli {
       assert(is_available()), _function(command);
     }
 
-    private:
-    function_t _function;
-
+    protected:
+    //! Check validation
     bool is_available() noexcept
     {
       return _function != nullptr;
     }
+
+    private:
+    function_t _function;
 
   };
 
@@ -134,14 +137,16 @@ namespace cli {
       assert(is_available()), (_engine->*_function)(command);
     }
 
-    private:
-    Engine*     _engine;
-    function_t  _function;
-
+    protected:
+    //! Check validation
     bool is_available() noexcept
     {
       return _engine != nullptr && _function != nullptr;
     }
+
+    private:
+    Engine*     _engine;
+    function_t  _function;
 
   };
 
